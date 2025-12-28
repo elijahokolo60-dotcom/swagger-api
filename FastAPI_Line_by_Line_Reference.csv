@@ -1,0 +1,18 @@
+Line,Code,Pseudo Syntax,What It Does,Simple Analogy
+1,"from fastapi import FastAPI, HTTPException, Query, Path, Body",IMPORT FastAPI components,Imports FastAPI framework utilities,Getting web API toolkit
+2,"from pydantic import BaseModel, Field",IMPORT Pydantic models,Imports data validation and serialization,Getting data schema tools
+3,"from typing import List, Optional",IMPORT type hints,Imports type annotations for Python,Getting data type specifications
+4,from datetime import datetime,IMPORT datetime class,Imports date/time handling,Getting timestamp tools
+7,app = FastAPI(...),CREATE FastAPI application,Initializes FastAPI web server,Building the API server foundation
+45,class UserBase(BaseModel):,DEFINE UserBase model,Creates base user data schema,Building user template foundation
+46,email: str = Field(...),DEFINE email field,Email string with example,Adding email with sample data
+47,full_name: Optional[str],DEFINE optional name,Optional string field,Adding optional name field
+49,class UserCreate(UserBase):,DEFINE UserCreate model,Extends UserBase for creation,Building user creation schema
+50,password: str = Field(...),DEFINE password field,Password with validation rules,Adding password with security rules
+52,class UserResponse(UserBase):,DEFINE UserResponse model,Extends UserBase for responses,Building user response schema
+53,id: int,ADD id field,Integer identifier,Adding user ID number
+54,is_active: bool,ADD status field,Boolean active status,Adding user active status
+55,created_at: datetime,ADD timestamp field,Date/time of creation,Adding creation timestamp
+61,@app.get('/'),DEFINE root endpoint,Maps GET / to function,Creating health check endpoint
+67,@app.get('/users'),DEFINE get users endpoint,Creates GET /users endpoint,Setting up user listing service
+90,@app.get('/users/{user_id}'),DEFINE get user endpoint,Creates GET user by ID endpoint,Setting up individual user lookup
