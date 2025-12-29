@@ -1,0 +1,29 @@
+Line,Operation,Before Code (Error),Add/Subtract,After Code (Fixed),Purpose
+1,Import,(no import),ADD,from fastapi.openapi.utils import get_openapi,Import the standalone function to avoid recursion
+2,Function start,def custom_openapi():,SAME,def custom_openapi():,Function definition remains same
+3,Cache check,if app.openapi_schema:,SAME,if app.openapi_schema:,Check if schema already cached
+4,Return cached,return app.openapi_schema,SAME,return app.openapi_schema,Return cached schema if exists
+5,Empty line,,SAME,,Blank line for readability
+6,CRITICAL LINE,openapi_schema = app.openapi(),REPLACE,openapi_schema = get_openapi(,Call standalone function instead of recursive call
+7,Parameter 1,(no parameters),ADD,"title=app.title,",Pass app title to get_openapi
+8,Parameter 2,(no parameters),ADD,"version=app.version,",Pass app version
+9,Parameter 3,(no parameters),ADD,"description=app.description,",Pass app description
+10,Parameter 4,(no parameters),ADD,"routes=app.routes,",Pass app routes
+11,Close function,(line 6 only),ADD,),Close get_openapi call
+12,Empty line,,SAME,,Blank line
+13,Add security,"openapi_schema[""components""][""securitySchemes""] = {...}",SAME,"openapi_schema[""components""][""securitySchemes""] = {...}",Add security schemes
+14,Security config,"""BearerAuth"": {...}",SAME,"""BearerAuth"": {...}",JWT bearer token config
+15,Security config,"""BearerAuth"": {...}",SAME,"""BearerAuth"": {...}",JWT bearer token config
+16,Security config,"""BearerAuth"": {...}",SAME,"""BearerAuth"": {...}",JWT bearer token config
+17,Empty line,,SAME,,Blank line
+18,Add servers,"openapi_schema[""servers""] = [...]",SAME,"openapi_schema[""servers""] = [...]",Add server configurations
+19,Server configs,Server objects,SAME,Server objects,Development and production servers
+20,Server configs,Server objects,SAME,Server objects,Development and production servers
+21,Server configs,Server objects,SAME,Server objects,Development and production servers
+22,Server configs,Server objects,SAME,Server objects,Development and production servers
+23,Server configs,Server objects,SAME,Server objects,Development and production servers
+24,Server configs,Server objects,SAME,Server objects,Development and production servers
+25,Empty line,,SAME,,Blank line
+26,Cache result,app.openapi_schema = openapi_schema,SAME,app.openapi_schema = openapi_schema,Store generated schema in cache
+27,Return,return app.openapi_schema,SAME,return app.openapi_schema,Return the generated schema
+28,Function end,(implied),SAME,(implied),End of function
